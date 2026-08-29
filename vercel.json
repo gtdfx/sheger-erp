@@ -1,8 +1,30 @@
 {
-  "buildCommand": "cd client && npm install && npm run build && cd .. && node -e \"require('fs').cpSync('client/dist','public',{recursive:true})\"",
-  "installCommand": "npm install && cd client && npm install",
-  "outputDirectory": "public",
-  "rewrites": [
-    { "source": "/((?!api).*)", "destination": "/index.html" }
+  "builds": [
+    {
+      "src": "api/index.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "client/dist/index.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/index.js"
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "/client/dist/assets/$1"
+    },
+    {
+      "src": "/(.*\\.(jpg|jpeg|png|svg|ico|js|css|woff|woff2|ttf|eot))",
+      "dest": "/client/dist/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/client/dist/index.html"
+    }
   ]
 }
