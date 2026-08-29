@@ -1,4 +1,4 @@
-const BASE = '/api';
+const BASE = (typeof window !== 'undefined' && window.location.hostname === 'localhost') ? 'http://localhost:3001/api' : '/api';
 
 function getToken() {
   return localStorage.getItem('sheger_token');
