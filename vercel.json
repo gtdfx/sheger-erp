@@ -1,13 +1,8 @@
 {
-  "buildCommand": "cd client && npm install && npm run build",
-  "outputDirectory": "client/dist",
-  "installCommand": "npm install",
+  "buildCommand": "cd client && npm install && npm run build && cd .. && node -e \"require('fs').cpSync('client/dist','public',{recursive:true})\"",
+  "installCommand": "npm install && cd client && npm install",
+  "outputDirectory": "public",
   "rewrites": [
     { "source": "/((?!api).*)", "destination": "/index.html" }
-  ],
-  "functions": {
-    "api/index.js": {
-      "includeFiles": false
-    }
-  }
+  ]
 }
