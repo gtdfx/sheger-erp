@@ -39,8 +39,9 @@ module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   const url = new URL(req.url, `https://${req.headers.host}`);
-  const slug = url.pathname.replace('/api/', '').replace(/\/$/, '');
-  const p = slug.split('/');
+  let slug = url.pathname.replace(/^\/api\//, '').replace(/\/$/, '');
+  if (!slug) slug = '';
+  const p = slug ? slug.split('/') : [''];
   const db = getDB();
   const body = req.body || {};
 
