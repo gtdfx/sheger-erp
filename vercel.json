@@ -1,32 +1,17 @@
 {
   "buildCommand": "cd client && npm install && npm run build",
   "installCommand": "npm install && cd client && npm install",
+  "outputDirectory": "dist",
   "builds": [
     {
       "src": "api/index.js",
       "use": "@vercel/node"
-    },
-    {
-      "src": "client/dist/**",
-      "use": "@vercel/static"
     }
   ],
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/index.js"
-    },
-    {
-      "src": "/assets/(.*)",
-      "dest": "/client/dist/assets/$1"
-    },
-    {
-      "src": "/(login-bg\\.jpg)",
-      "dest": "/client/dist/$1"
-    },
-    {
-      "src": "/((?!api).*)",
-      "dest": "/client/dist/index.html"
-    }
+    { "src": "/api/(.*)", "dest": "/api/index.js" },
+    { "src": "/assets/(.*)", "dest": "/dist/assets/$1" },
+    { "src": "/(login-bg\\.jpg)", "dest": "/dist/$1" },
+    { "src": "/((?!api).*)", "dest": "/dist/index.html" }
   ]
 }
