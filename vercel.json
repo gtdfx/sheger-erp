@@ -1,10 +1,6 @@
 {
   "buildCommand": "cd client && npm install && npm run build",
-  "outputDirectory": "client/dist",
+  "outputDirectory": "client/public",
   "installCommand": "npm install && cd client && npm install",
-  "framework": null,
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" },
-    { "source": "/((?!api/).*)", "destination": "/index.html" }
-  ]
+  "framework": null
 }
