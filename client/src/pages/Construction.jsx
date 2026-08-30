@@ -67,7 +67,7 @@ export default function Construction() {
               </div>
               <div className="flex items-center gap-2 mt-2 ml-7">
                 <select value={phase.status} onChange={e => { e.stopPropagation(); updatePhaseStatus(phase.id, e.target.value) }}
-                  onClick={e => e.stopPropagation()} className="select-input text-xs py-1.5 px-2 flex-1"
+                  onClick={e => e.stopPropagation()} className="select-input text-xs py-1.5 px-2 w-auto"
                 >
                   {Object.entries(statusLabels).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
                 </select>
@@ -77,25 +77,29 @@ export default function Construction() {
             {expanded[phase.id] && (
               <div className="border-t border-[#d8e0ed]-light p-4 space-y-2 bg-[#f4f6fb]/30">
                 {phase.milestones.map(m => (
-                  <div key={m.id} className="flex items-center gap-3 p-3 rounded-sm bg-elevated border border-[#d8e0ed]-light">
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-[#141b2d]">{m.title}</p>
-                      <div className="flex items-center gap-3 mt-1 text-xs text-[#141b2d]-muted">
-                        {m.due_date && <span>Due: {m.due_date}</span>}
-                        {m.assigned_to && <span>Assigned: {m.assigned_to}</span>}
-                        {m.photo_path && <a href={m.photo_path} target="_blank" rel="noopener" className="text-[#1e4d8c] hover:underline">View Photo</a>}
+                  <div key={m.id} className="p-3 rounded-sm bg-elevated border border-[#d8e0ed]-light">
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium text-[#141b2d] truncate">{m.title}</p>
+                        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 text-xs text-[#141b2d]-muted">
+                          {m.due_date && <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> Due: {m.due_date}</span>}
+                          {m.assigned_to && <span>Assigned: {m.assigned_to}</span>}
+                          {m.photo_path && <a href={m.photo_path} target="_blank" rel="noopener" className="text-[#1e4d8c] hover:underline">View Photo</a>}
+                        </div>
                       </div>
                     </div>
-                    <label className="p-1.5 text-[#141b2d]-muted hover:text-[#1e4d8c] cursor-pointer transition-colors rounded-sm hover:bg-[#1e4d8c]/5">
-                      <Camera className="w-4 h-4" />
-                      <input type="file" accept="image/*" className="hidden" onChange={e => e.target.files[0] && uploadPhoto(m.id, e.target.files[0])} />
-                    </label>
-                    <select value={m.status} onChange={e => updateMilestone(m.id, e.target.value)} className="select-input text-xs py-1.5 px-2 min-w-[110px]">
-                      {Object.entries(statusLabels).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
-                    </select>
-                    <button onClick={() => deleteMilestone(m.id)} className="p-1.5 text-[#141b2d]-muted hover:text-[#dc2626] transition-colors rounded-sm hover:bg-[#fef2f2]">
-                      <Trash2 className="w-4 h-4" />
-                    </button>
+                    <div className="flex items-center gap-2 mt-2 pt-2 border-t border-[#d8e0ed]-light">
+                      <select value={m.status} onChange={e => updateMilestone(m.id, e.target.value)} className="select-input text-xs py-1.5 px-2 flex-1 min-w-0">
+                        {Object.entries(statusLabels).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
+                      </select>
+                      <label className="p-1.5 text-[#141b2d]-muted hover:text-[#1e4d8c] cursor-pointer transition-colors rounded-sm hover:bg-[#1e4d8c]/5 flex-shrink-0">
+                        <Camera className="w-4 h-4" />
+                        <input type="file" accept="image/*" className="hidden" onChange={e => e.target.files[0] && uploadPhoto(m.id, e.target.files[0])} />
+                      </label>
+                      <button onClick={() => deleteMilestone(m.id)} className="p-1.5 text-[#141b2d]-muted hover:text-[#dc2626] transition-colors rounded-sm hover:bg-[#fef2f2] flex-shrink-0">
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
                 ))}
 
