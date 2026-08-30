@@ -47,7 +47,7 @@ export default function Documents() {
 
       <div className="card p-5">
         <h3 className="font-display font-semibold text-sm mb-3">Upload Document</h3>
-        <div className="flex flex-col sm:flex-row gap-3">
+        <div className="flex flex-col gap-3">
           <input placeholder="Document title" value={form.title} onChange={e => setForm(f => ({...f, title: e.target.value}))} className="input text-sm flex-1" />
           <select value={form.folder} onChange={e => setForm(f => ({...f, folder: e.target.value}))} className="select-input text-sm w-40">
             {folders.filter(f => f.id !== 'all').map(f => <option key={f.id} value={f.id}>{f.label}</option>)}
@@ -69,7 +69,7 @@ export default function Documents() {
       </div>
 
       {docs.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {docs.map(doc => (
             <div key={doc.id} className="card-hover p-4 flex items-start gap-3">
               <div className="w-10 h-10 rounded-sm bg-[#f4f6fb] flex items-center justify-center flex-shrink-0">{fileIcon(doc.file_type)}</div>

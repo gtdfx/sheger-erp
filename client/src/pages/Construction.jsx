@@ -52,23 +52,25 @@ export default function Construction() {
       <div className="space-y-3">
         {phases.map(phase => (
           <div key={phase.id} className="card overflow-hidden">
-            <button className="w-full flex items-center gap-4 p-4 text-left hover:bg-[#f4f6fb]/50 transition-colors"
+            <button className="w-full text-left hover:bg-[#f4f6fb]/50 transition-colors p-4"
               onClick={() => setExpanded(e => ({ ...e, [phase.id]: !e[phase.id] }))}
             >
-              {expanded[phase.id] ? <ChevronDown className="w-4 h-4 text-[#141b2d]-muted" /> : <ChevronRight className="w-4 h-4 text-[#141b2d]-muted" />}
-              <div className="flex-1">
-                <p className="font-display font-semibold text-sm text-[#141b2d]">{phase.name}</p>
-                <p className="text-xs text-[#141b2d]-muted mt-0.5">{phase.milestones.length} milestones · {phase.progress}% complete</p>
-              </div>
               <div className="flex items-center gap-3">
+                {expanded[phase.id] ? <ChevronDown className="w-4 h-4 text-[#141b2d]-muted flex-shrink-0" /> : <ChevronRight className="w-4 h-4 text-[#141b2d]-muted flex-shrink-0" />}
+                <div className="flex-1 min-w-0">
+                  <p className="font-display font-semibold text-sm text-[#141b2d] truncate">{phase.name}</p>
+                  <p className="text-xs text-[#141b2d]-muted mt-0.5">{phase.milestones.length} milestones · {phase.progress}% complete</p>
+                </div>
+                <div className="w-20 h-2 bg-[#f4f6fb] rounded-full overflow-hidden flex-shrink-0">
+                  <div className="h-full bg-primary rounded-full" style={{ width: `${phase.progress}%` }} />
+                </div>
+              </div>
+              <div className="flex items-center gap-2 mt-2 ml-7">
                 <select value={phase.status} onChange={e => { e.stopPropagation(); updatePhaseStatus(phase.id, e.target.value) }}
-                  onClick={e => e.stopPropagation()} className="select-input text-xs py-1.5 px-3 min-w-[120px]"
+                  onClick={e => e.stopPropagation()} className="select-input text-xs py-1.5 px-2 flex-1"
                 >
                   {Object.entries(statusLabels).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
                 </select>
-                <div className="w-24 h-2 bg-[#f4f6fb] rounded-full overflow-hidden">
-                  <div className="h-full bg-primary rounded-full" style={{ width: `${phase.progress}%` }} />
-                </div>
               </div>
             </button>
 
@@ -100,7 +102,7 @@ export default function Construction() {
                 {showAdd === phase.id ? (
                   <div className="p-4 rounded-sm bg-elevated border border-[#d8e0ed]-light space-y-3">
                     <input placeholder="Milestone title" value={newMilestone.title} onChange={e => setNewMilestone(n => ({ ...n, title: e.target.value }))} className="input text-sm" />
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <input type="date" value={newMilestone.due_date} onChange={e => setNewMilestone(n => ({ ...n, due_date: e.target.value }))} className="input text-sm" />
                       <input placeholder="Assigned to" value={newMilestone.assigned_to} onChange={e => setNewMilestone(n => ({ ...n, assigned_to: e.target.value }))} className="input text-sm" />
                     </div>

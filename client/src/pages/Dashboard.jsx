@@ -50,7 +50,7 @@ export default function Dashboard() {
         <KPICard icon={Users} label="Apartments" value={`${data.sales.sold}/${data.sales.total}`} sub={`${data.sales.available} available`} color="green" />
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '16px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(400px, 100%), 1fr))', gap: '16px' }}>
         <div className="card" style={{ padding: '20px' }}>
           <h3 style={{ fontWeight: 600, fontSize: '0.875rem', margin: '0 0 16px' }}>Expenses by Category</h3>
           {data.expensesByCategory.length > 0 ? (
@@ -87,7 +87,7 @@ export default function Dashboard() {
         <div style={{ display: 'grid', gap: '12px' }}>
           {data.construction.phases.map(phase => (
             <div key={phase.id} style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-              <div style={{ width: '176px', flexShrink: 0 }}><p style={{ fontSize: '0.875rem', fontWeight: 500, margin: 0 }}>{phase.name}</p></div>
+              <div style={{ width: '140px', flexShrink: 0 }}><p style={{ fontSize: '0.82rem', fontWeight: 500, margin: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{phase.name}</p></div>
               <div style={{ flex: 1, height: '12px', background: '#f4f6fb', borderRadius: '99px', overflow: 'hidden' }}>
                 <div style={{ height: '100%', background: 'linear-gradient(90deg, #1e4d8c, #2563b5)', borderRadius: '99px', transition: 'width 0.7s ease', width: `${phase.progress || 0}%` }} />
               </div>
@@ -97,7 +97,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '16px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(400px, 100%), 1fr))', gap: '16px' }}>
         <div className="card" style={{ padding: '20px' }}>
           <h3 style={{ fontWeight: 600, fontSize: '0.875rem', margin: '0 0 16px' }}>Upcoming Milestones</h3>
           {data.upcomingMilestones.length > 0 ? data.upcomingMilestones.map(m => (

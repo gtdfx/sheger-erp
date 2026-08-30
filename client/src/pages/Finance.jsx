@@ -30,12 +30,12 @@ export default function Finance() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <h1 className="text-[1.28rem] font-bold tracking-tight">Budget & Finance</h1>
           <p className="text-[#141b2d]-muted text-[0.88rem] mt-0.5">Track project budget and expenses</p>
         </div>
-        <button onClick={() => setShowAdd(!showAdd)} className="btn-primary"><Plus className="w-4 h-4" /> Add Expense</button>
+        <button onClick={() => setShowAdd(!showAdd)} className="btn-primary self-start"><Plus className="w-4 h-4" /> Add Expense</button>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -55,22 +55,24 @@ export default function Finance() {
         <h3 className="font-display font-semibold text-sm mb-4">Budget Allocation</h3>
         <div className="space-y-3">
           {budget?.categories.map(cat => (
-            <div key={cat.category} className="flex items-center gap-4 p-3 rounded-sm bg-[#f4f6fb]/50">
-              <div className="w-32 flex-shrink-0"><p className="text-sm font-medium text-[#141b2d]">{cat.category}</p></div>
-              <div className="flex-1 h-3 bg-border-light rounded-full overflow-hidden">
+            <div key={cat.category} className="p-3 rounded-sm bg-[#f4f6fb]/50">
+              <div className="flex items-center justify-between mb-2">
+                <p className="text-sm font-medium text-[#141b2d]">{cat.category}</p>
+                {editingBudget === cat.category ? (
+                  <div className="flex items-center gap-2">
+                    <input type="number" defaultValue={cat.allocated} className="input text-xs w-24 py-1.5" id={`budget-${cat.category}`} />
+                    <button onClick={() => saveBudget(cat.category, document.getElementById(`budget-${cat.category}`).value)} className="btn-primary text-xs py-1.5 px-3">Save</button>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2 text-xs text-[#141b2d]-muted">
+                    <span>{fmt(cat.spent)} / {fmt(cat.allocated)} ETB</span>
+                    <button onClick={() => setEditingBudget(cat.category)} className="p-1 hover:text-[#1e4d8c]"><Edit3 className="w-3.5 h-3.5" /></button>
+                  </div>
+                )}
+              </div>
+              <div className="h-3 bg-border-light rounded-full overflow-hidden">
                 <div className="h-full bg-gradient-to-r from-[#1e4d8c] to-[#2563b5] rounded-full" style={{ width: `${cat.allocated > 0 ? Math.min((cat.spent / cat.allocated) * 100, 100) : 0}%` }} />
               </div>
-              {editingBudget === cat.category ? (
-                <div className="flex items-center gap-2">
-                  <input type="number" defaultValue={cat.allocated} className="input text-xs w-28 py-1.5" id={`budget-${cat.category}`} />
-                  <button onClick={() => saveBudget(cat.category, document.getElementById(`budget-${cat.category}`).value)} className="btn-primary text-xs py-1.5 px-3">Save</button>
-                </div>
-              ) : (
-                <div className="flex items-center gap-2 text-xs text-[#141b2d]-muted">
-                  <span>{fmt(cat.spent)} / {fmt(cat.allocated)} ETB</span>
-                  <button onClick={() => setEditingBudget(cat.category)} className="p-1 hover:text-[#1e4d8c]"><Edit3 className="w-3.5 h-3.5" /></button>
-                </div>
-              )}
             </div>
           ))}
         </div>
@@ -93,7 +95,7 @@ export default function Finance() {
       {showAdd && (
         <div className="card p-5 space-y-3">
           <h3 className="font-display font-semibold text-sm">New Expense</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <select value={form.category} onChange={e => setForm(f => ({ ...f, category: e.target.value }))} className="select-input text-sm">
               {categories.map(c => <option key={c}>{c}</option>)}
             </select>

@@ -148,3 +148,59 @@
   .badge-blue { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
   .badge-gray { background: #f4f6fb; color: #7d8899; border: 1px solid #e9eef6; }
 }
+
+/* ===== Mobile Responsive ===== */
+@media (max-width: 1024px) {
+  .kpi-grid, [style*="grid-template-columns: repeat(auto-fill"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  [style*="grid-template-columns: repeat(auto-fit, minmax(400px"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .kpi-grid, [style*="grid-template-columns: repeat(auto-fill"] {
+    grid-template-columns: 1fr !important;
+  }
+  main {
+    padding: 12px !important;
+  }
+  h1 {
+    font-size: 1.1rem !important;
+  }
+  .card, .card-hover {
+    border-radius: 10px;
+  }
+  table {
+    font-size: 0.78rem;
+  }
+  table th, table td {
+    padding: 6px 8px !important;
+  }
+  .btn-primary, .btn-secondary, .btn-danger {
+    padding: 8px 14px;
+    font-size: 0.8rem;
+  }
+  .input, .select-input {
+    font-size: 0.85rem;
+    padding: 9px 10px;
+  }
+}
+
+/* Scrollable tables on mobile */
+@media (max-width: 768px) {
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .overflow-x-auto::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Smooth transitions for sidebar */
+@keyframes slideIn {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}

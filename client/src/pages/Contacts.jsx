@@ -24,12 +24,12 @@ export default function Contacts() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <h1 className="text-[1.28rem] font-bold tracking-tight">Team & Contacts</h1>
           <p className="text-[#141b2d]-muted text-[0.88rem] mt-0.5">Workers, contractors, suppliers, and legal</p>
         </div>
-        <button onClick={() => { setShowAdd(!showAdd); setEditing(null); setForm({ name: '', role: 'contractor', phone: '', email: '', company: '', notes: '' }) }} className="btn-primary">
+        <button onClick={() => { setShowAdd(!showAdd); setEditing(null); setForm({ name: '', role: 'contractor', phone: '', email: '', company: '', notes: '' }) }} className="btn-primary self-start">
           <Plus className="w-4 h-4" /> Add Contact
         </button>
       </div>
@@ -46,7 +46,7 @@ export default function Contacts() {
       {showAdd && (
         <div className="card p-5 space-y-3">
           <h3 className="font-display font-semibold text-sm">{editing ? 'Edit Contact' : 'New Contact'}</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <input placeholder="Full name" value={form.name} onChange={e => setForm(f => ({...f, name: e.target.value}))} className="input text-sm" />
             <select value={form.role} onChange={e => setForm(f => ({...f, role: e.target.value}))} className="select-input text-sm capitalize">
               {roles.filter(r => r !== 'all').map(r => <option key={r} value={r}>{r}</option>)}
@@ -64,7 +64,7 @@ export default function Contacts() {
       )}
 
       {contacts.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {contacts.map(c => (
             <div key={c.id} className="card-hover p-5">
               <div className="flex items-start justify-between mb-3">
