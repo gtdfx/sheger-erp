@@ -109,8 +109,8 @@ export default function Login() {
         }}>
           <div className="login-card-shimmer" />
           {/* Logo */}
-          <div style={{ width: '72px', height: '72px', margin: '0 auto 16px', borderRadius: '12px', background: 'rgba(30,77,140,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Building2 className="w-8 h-8" style={{ color: '#1e4d8c' }} />
+          <div style={{ margin: '0 auto 16px' }}>
+            <img src="/logo.webp" alt="Sheger Real Estate" style={{ height: '64px', width: 'auto' }} onError={(e) => { e.target.src = '/logo.png' }} />
           </div>
 
           <h1 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 700, color: '#141b2d', letterSpacing: '-0.03em' }}>

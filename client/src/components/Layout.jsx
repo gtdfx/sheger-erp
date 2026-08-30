@@ -55,10 +55,7 @@ export default function Layout() {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: isMobile ? 'space-between' : 'flex-end', padding: '12px 16px', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
           {isMobile && (
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(255,255,255,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Building2 style={{ width: '16px', height: '16px', color: '#c4a35a' }} />
-              </div>
-              <span style={{ fontSize: '0.9rem', fontWeight: 700, color: '#fff' }}>Sheger <span style={{ color: '#c4a35a' }}>ERP</span></span>
+              <img src="/logo.webp" alt="Sheger" style={{ height: '28px', width: 'auto' }} onError={(e) => { e.target.src = '/logo.png' }} />
             </div>
           )}
           <button onClick={() => isMobile ? setMobileOpen(false) : setSidebarOpen(!sidebarOpen)}
@@ -73,9 +70,7 @@ export default function Layout() {
         {!isMobile && (
           <div style={{ padding: sidebarOpen ? '16px 16px 14px' : '16px 8px 14px', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <div style={{ width: '40px', height: '40px', borderRadius: '8px', background: 'rgba(255,255,255,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                <Building2 className="w-5 h-5" style={{ color: '#c4a35a' }} />
-              </div>
+              <img src="/logo.webp" alt="Sheger Real Estate" style={{ height: '36px', width: 'auto' }} onError={(e) => { e.target.src = '/logo.png' }} />
               {sidebarOpen && (
                 <div style={{ minWidth: 0 }}>
                   <h1 style={{ margin: 0, fontSize: '0.95rem', fontWeight: 700, color: '#fff', lineHeight: 1.25, letterSpacing: '-0.02em' }}>
